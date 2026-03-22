@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Agents Company
 
-## Getting Started
+Высококонверсионный B2B лендинг для компании, разрабатывающей AI-агентов для бизнеса.
 
-First, run the development server:
+## Описание проекта
 
+Современный сайт с темной cyberpunk темой, построенный на Next.js 16 с использованием TypeScript, Tailwind CSS и Framer Motion. Сайт включает:
+
+- Главную страницу с секциями Hero, Проблемы/Решения, Услуги, Технологии, Кейсы, Процесс, Доверие, Калькулятор стоимости, Контактная форма
+- Страницы Услуг, Кейсов, Блога, Контактов
+- AI Demo Widget (мини-чат)
+- Полная SEO оптимизация (sitemap, robots.txt, meta tags)
+- Адаптивный дизайн
+- Анимации и эффекты
+
+## Технологии
+
+- **Next.js 16** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **Framer Motion**
+- **React 19**
+
+## Запуск проекта
+
+1. Установите зависимости:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Запустите сервер разработки:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Сборка для продакшена
 
-## Learn More
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Структура проекта
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/
+├── api/contact/          # API для обработки форм
+├── blog/                 # Страницы блога
+├── cases/                # Страница кейсов
+├── contact/              # Контактная страница
+├── services/             # Страница услуг
+├── globals.css           # Глобальные стили
+├── layout.tsx            # Корневой layout
+├── page.tsx              # Главная страница
+├── robots.ts             # Robots.txt
+└── sitemap.ts            # Sitemap.xml
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+components/
+├── AIDemo.tsx            # AI Demo Widget
+├── Cases.tsx             # Секция кейсов
+├── ContactForm.tsx       # Контактная форма
+├── CostCalculator.tsx    # Калькулятор стоимости
+├── Header.tsx            # Навигационная панель
+├── Hero.tsx              # Hero секция
+├── ProblemSolution.tsx   # Проблемы/Решения
+├── Process.tsx           # Процесс работы
+├── Services.tsx          # Услуги
+├── TechStack.tsx         # Технологический стек
+└── Trust.tsx             # Доверие и безопасность
+```
 
-## Deploy on Vercel
+## Цветовая схема
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Background: #0B0F19
+- Primary: #00D1FF
+- Secondary: #7B61FF
+- Accent: #00FF94
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Деплой
+
+Проект готов к деплою на Vercel, Netlify или любой другой платформе, поддерживающей Next.js.
