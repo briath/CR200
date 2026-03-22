@@ -78,6 +78,29 @@ components/
 - Secondary: #7B61FF
 - Accent: #00FF94
 
-## Деплой
+## Запуск с Docker
 
-Проект готов к деплою на Vercel, Netlify или любой другой платформе, поддерживающей Next.js.
+### Предварительные требования
+Установите Docker и Docker Compose на ваш компьютер.
+
+### Сборка и запуск
+```bash
+# Сборка образа и запуск контейнера
+docker-compose up --build
+
+# Или в фоне
+docker-compose up -d --build
+```
+
+Приложение будет доступно по адресу: http://localhost:3000
+
+### Остановка
+```bash
+docker-compose down
+```
+
+### Только продакшен сборка
+```bash
+docker build -t ai-agents-site .
+docker run -p 3000:3000 ai-agents-site
+```
