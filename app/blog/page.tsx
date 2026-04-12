@@ -1,79 +1,138 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
+import { formatBlogDate, getBlogPosts } from '@/lib/blog';
 
-const posts = [
-  {
-    id: 1,
-    title: 'Как AI-агенты революционизируют бизнес-процессы',
-    excerpt: 'Узнайте, как искусственный интеллект меняет подход к автоматизации в компаниях любого размера.',
-    date: '2024-03-15',
-    readTime: '5 мин',
-    slug: 'ai-agents-revolution',
-  },
-  {
-    id: 2,
-    title: 'ROI от внедрения AI в отдел продаж',
-    excerpt: 'Анализ реальных кейсов и расчет окупаемости инвестиций в AI-автоматизацию продаж.',
-    date: '2024-03-10',
-    readTime: '7 мин',
-    slug: 'roi-ai-sales',
-  },
-  {
-    id: 3,
-    title: 'Будущее поддержки клиентов: от чат-ботов к полноценным AI-агентам',
-    excerpt: 'Эволюция технологий поддержки и что ожидать в ближайшие годы.',
-    date: '2024-03-05',
-    readTime: '6 мин',
-    slug: 'future-customer-support',
-  },
-];
+export const dynamic = 'force-dynamic';
 
-export default function BlogPage() {
+export const metadata: Metadata = {
+  title: 'Блог об AI-автоматизации для бизнеса',
+  description:
+    'Практические материалы о внедрении AI-агентов, ROI автоматизации, продажах, поддержке и внутренних процессах компании.',
+};
+
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts();
+  const [featuredPost, ...otherPosts] = blogPosts;
+
   return (
-    <div className="min-h-screen py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        <motion.h1
-          className="text-5xl font-bold text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          Блог
-        </motion.h1>
+    <div className="min-h-screen px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(0,209,255,0.18),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(123,97,255,0.18),transparent_30%),linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] px-6 py-10 sm:px-10 sm:py-14">
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.07),transparent_36%,transparent_64%,rgba(255,255,255,0.04))]" />
+          <div className="relative mx-auto max-w-3xl text-center">
+            <p className="mb-4 text-sm uppercase tracking-[0.32em] text-primary/90">Блог</p>
+            <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Материалы о внедрении AI-агентов в бизнес
+            </h1>
+            <p className="mt-6 text-base leading-8 text-slate-300 sm:text-lg">
+              Пишем о том, как компании считают ROI, где автоматизация даёт реальный результат и как запускать AI-сценарии
+              без хайпа, но с понятным бизнес-эффектом.
+            </p>
+          </div>
+        </section>
 
-        <div className="space-y-8">
-          {posts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              className="glass p-6 rounded-xl"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
+        {featuredPost ? (
+          <section className="mt-10">
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              className="group grid overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-[0_30px_80px_rgba(3,8,20,0.45)] transition duration-300 hover:-translate-y-1 hover:border-primary/40 lg:grid-cols-[1.2fr_0.8fr]"
             >
-              <div className="flex justify-between items-start mb-4">
-                <h2 className="text-2xl font-semibold hover:text-primary transition-colors">
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                </h2>
-                <div className="text-sm text-gray-400">
-                  {post.readTime}
+              <div className="relative min-h-[320px] overflow-hidden">
+                {featuredPost.coverImage ? (
+                  <Image
+                    src={featuredPost.coverImage}
+                    alt={featuredPost.coverAlt || featuredPost.title}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    priority
+                  />
+                ) : null}
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(11,15,25,0.18),rgba(11,15,25,0.82))]" />
+              </div>
+
+              <div className="relative flex flex-col justify-between gap-8 p-6 sm:p-8 lg:p-10">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,209,255,0.08),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(123,97,255,0.12),transparent_40%)]" />
+                <div className="relative">
+                  <div className="mb-5 flex flex-wrap items-center gap-3 text-sm text-slate-300">
+                    <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-primary">Рекомендуем начать отсюда</span>
+                    <span>{formatBlogDate(featuredPost.date)}</span>
+                    <span>{featuredPost.readTime}</span>
+                  </div>
+                  <h2 className="max-w-xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">{featuredPost.title}</h2>
+                  <p className="mt-5 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">{featuredPost.excerpt}</p>
+                </div>
+
+                <div className="relative">
+                  <div className="mb-6 flex flex-wrap gap-2">
+                    {featuredPost.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.18em] text-slate-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-primary transition group-hover:gap-3">
+                    Читать статью
+                    <span aria-hidden="true">→</span>
+                  </span>
                 </div>
               </div>
-              <p className="text-gray-300 mb-4">{post.excerpt}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-400">{post.date}</span>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="text-primary hover:text-primary/80 transition-colors"
-                >
-                  Читать далее →
-                </Link>
-              </div>
-            </motion.article>
+            </Link>
+          </section>
+        ) : null}
+
+        <section className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {otherPosts.map((post) => (
+            <article
+              key={post.slug}
+              className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] shadow-[0_24px_64px_rgba(4,9,18,0.32)] transition duration-300 hover:-translate-y-1 hover:border-primary/30"
+            >
+              <Link href={`/blog/${post.slug}`} className="block h-full">
+                <div className="relative h-56 overflow-hidden">
+                  {post.coverImage ? (
+                    <Image
+                      src={post.coverImage}
+                      alt={post.coverAlt || post.title}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-[1.05]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    />
+                  ) : null}
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,15,25,0.05),rgba(11,15,25,0.7))]" />
+                </div>
+
+                <div className="relative p-6">
+                  <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-slate-400">
+                    <span>{formatBlogDate(post.date)}</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h2 className="text-2xl font-semibold leading-tight text-white transition group-hover:text-primary">{post.title}</h2>
+                  <p className="mt-4 text-sm leading-7 text-slate-300">{post.excerpt}</p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-5 text-sm">
+                    <span className="text-slate-400">Практический материал</span>
+                    <span className="font-medium text-primary">Открыть →</span>
+                  </div>
+                </div>
+              </Link>
+            </article>
           ))}
-        </div>
+        </section>
       </div>
     </div>
   );

@@ -1,106 +1,107 @@
-# AI Agents Company
+# AI Agents
 
-Высококонверсионный B2B лендинг для компании, разрабатывающей AI-агентов для бизнеса.
-
-## Описание проекта
-
-Современный сайт с темной cyberpunk темой, построенный на Next.js 16 с использованием TypeScript, Tailwind CSS и Framer Motion. Сайт включает:
-
-- Главную страницу с секциями Hero, Проблемы/Решения, Услуги, Технологии, Кейсы, Процесс, Доверие, Калькулятор стоимости, Контактная форма
-- Страницы Услуг, Кейсов, Блога, Контактов
-- AI Demo Widget (мини-чат)
-- Полная SEO оптимизация (sitemap, robots.txt, meta tags)
-- Адаптивный дизайн
-- Анимации и эффекты
+Лендинг для бизнеса, который предлагает услуги по внедрению AI-агентов для продаж, поддержки и внутренних процессов.
 
 ## Технологии
 
-- **Next.js 16** (App Router)
-- **TypeScript**
-- **Tailwind CSS**
-- **Framer Motion**
-- **React 19**
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
 
-## Запуск проекта
+## Локальный запуск
 
-1. Установите зависимости:
 ```bash
 npm install
-```
-
-2. Запустите сервер разработки:
-```bash
 npm run dev
 ```
 
-3. Откройте [http://localhost:3000](http://localhost:3000) в браузере.
+Сайт будет доступен по адресу `http://localhost:3000`.
 
-## Сборка для продакшена
+## Production build
 
 ```bash
+npm run lint
 npm run build
 npm start
 ```
 
-## Структура проекта
+## Docker
 
-```
-app/
-├── api/contact/          # API для обработки форм
-├── blog/                 # Страницы блога
-├── cases/                # Страница кейсов
-├── contact/              # Контактная страница
-├── services/             # Страница услуг
-├── globals.css           # Глобальные стили
-├── layout.tsx            # Корневой layout
-├── page.tsx              # Главная страница
-├── robots.ts             # Robots.txt
-└── sitemap.ts            # Sitemap.xml
-
-components/
-├── AIDemo.tsx            # AI Demo Widget
-├── Cases.tsx             # Секция кейсов
-├── ContactForm.tsx       # Контактная форма
-├── CostCalculator.tsx    # Калькулятор стоимости
-├── Header.tsx            # Навигационная панель
-├── Hero.tsx              # Hero секция
-├── ProblemSolution.tsx   # Проблемы/Решения
-├── Process.tsx           # Процесс работы
-├── Services.tsx          # Услуги
-├── TechStack.tsx         # Технологический стек
-└── Trust.tsx             # Доверие и безопасность
-```
-
-## Цветовая схема
-
-- Background: #0B0F19
-- Primary: #00D1FF
-- Secondary: #7B61FF
-- Accent: #00FF94
-
-## Запуск с Docker
-
-### Предварительные требования
-Установите Docker и Docker Compose на ваш компьютер.
-
-### Сборка и запуск
 ```bash
-# Сборка образа и запуск контейнера
-docker-compose up --build
-
-# Или в фоне
-docker-compose up -d --build
+docker compose --env-file .env.local up --build -d
 ```
 
-Приложение будет доступно по адресу: http://localhost:3000
+Остановка:
 
-### Остановка
 ```bash
-docker-compose down
+docker compose --env-file .env.local down
 ```
 
-### Только продакшен сборка
-```bash
-docker build -t ai-agents-site .
-docker run -p 3000:3000 ai-agents-site
+## Переменные окружения
+
+Основные:
+
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_CONTACT_EMAIL`
+- `NEXT_PUBLIC_CONTACT_PHONE`
+- `NEXT_PUBLIC_CONTACT_ADDRESS`
+- `TELEGRAM_BOT_TOKEN`
+- `TELEGRAM_ADMIN_CHAT_ID`
+
+Опционально:
+
+- `TELEGRAM_BLOG_WEBHOOK_SECRET`
+- `NEXT_PUBLIC_GTM_ID`
+- `NEXT_PUBLIC_YANDEX_METRIKA_ID`
+
+Шаблон лежит в [`.env.example`](./.env.example).
+
+## Блог и публикация через Telegram
+
+Статьи хранятся в `content/blog/*.json`, а изображения для карточек и страниц лежат в `public/blog/`.
+
+Чтобы бот публиковал новые статьи:
+
+1. Настройте webhook на `/api/telegram/blog`.
+2. При желании задайте секрет через `TELEGRAM_BLOG_WEBHOOK_SECRET`.
+3. Отправьте боту `/blog_help`, чтобы получить шаблон.
+
+Шаблон статьи:
+
+```text
+/publish
+title: Как AI-агенты ускоряют продажи
+slug: ai-sales-speed
+excerpt: Короткий анонс для карточки блога.
+tags: AI, Продажи, Автоматизация
+readTime: 6 мин
+coverAlt: AI-агент анализирует заявки в CRM
+content:
+Первый абзац статьи.
+
+Второй абзац статьи.
+
+Третий абзац статьи.
 ```
+
+Чтобы прикрепить обложку:
+
+1. Отправьте фото с подписью `/blog_cover ai-sales-speed`
+2. Потом отправьте команду `/publish` с таким же `slug`
+
+Изображения внутри текста тоже поддерживаются через блок:
+
+```text
+image: /blog/my-inline-image.jpg | Подпись к изображению
+```
+
+## Что уже подготовлено
+
+- форма отправки заявок в Telegram
+- антиспам-защита: honeypot, проверка времени заполнения, rate limit на API
+- блог с файловым хранилищем, обложками и Telegram-публикацией
+- SEO: sitemap, robots, metadata, Open Graph, Twitter card
+- юридические страницы
+- Docker-конфиг для локального запуска и проверки

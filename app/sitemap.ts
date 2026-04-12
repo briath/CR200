@@ -1,36 +1,50 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ai-agents-company.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://ai-agents-company.com',
+      url: siteUrl,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: 'https://ai-agents-company.com/services',
+      url: `${siteUrl}/services`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://ai-agents-company.com/cases',
+      url: `${siteUrl}/cases`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://ai-agents-company.com/blog',
+      url: `${siteUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.6,
+      priority: 0.7,
     },
     {
-      url: 'https://ai-agents-company.com/contact',
+      url: `${siteUrl}/contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.8,
     },
-  ]
+    {
+      url: `${siteUrl}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${siteUrl}/terms`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+  ];
 }

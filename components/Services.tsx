@@ -5,23 +5,23 @@ import { motion } from 'framer-motion';
 const services = [
   {
     title: 'Operations AI',
-    description: 'Автоматизация операционных процессов',
+    description: 'Автоматизация документооборота, отчётов, внутренних запросов и повторяемых задач.',
     icon: '⚙️',
   },
   {
     title: 'Sales AI',
-    description: 'AI для продаж и лидогенерации',
+    description: 'Квалификация лидов, follow-up, ответы на типовые вопросы и помощь отделу продаж.',
     icon: '📈',
   },
   {
     title: 'Support AI',
-    description: 'Чат-боты и поддержка клиентов',
+    description: 'Первая линия поддержки, база знаний, ответы 24/7 и эскалация сложных обращений.',
     icon: '💬',
   },
   {
     title: 'Custom AI',
-    description: 'Индивидуальные решения под ваши нужды',
-    icon: '🔧',
+    description: 'Индивидуальные агенты под вашу воронку, процессы, API и требования по безопасности.',
+    icon: '🛠️',
   },
 ];
 
@@ -36,7 +36,7 @@ export default function Services() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          Наши AI-агенты
+          Где AI-агенты приносят результат
         </motion.h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (

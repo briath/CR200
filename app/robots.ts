@@ -1,12 +1,13 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ai-agents-company.com';
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/private/',
     },
-    sitemap: 'https://ai-agents-company.com/sitemap.xml',
-  }
+    sitemap: `${siteUrl}/sitemap.xml`,
+  };
 }

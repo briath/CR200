@@ -6,21 +6,36 @@ import Link from 'next/link';
 const serviceDetails = [
   {
     title: 'Sales AI',
-    description: 'Автоматизация продаж и лидогенерации',
-    features: ['Квалификация лидов', 'Персонализированные предложения', 'Follow-up автоматизация', 'Анализ конверсии'],
-    examples: ['Увеличение конверсии на 40%', 'Сокращение времени продаж на 50%'],
+    description: 'Автоматизация продаж и ускорение первой реакции на входящие лиды.',
+    features: [
+      'Квалификация лидов по вашим критериям',
+      'Персонализированные ответы и follow-up',
+      'Обработка заявок из сайта, Telegram, WhatsApp и почты',
+      'Передача в CRM только релевантных контактов',
+    ],
+    examples: ['Снижение потерь лидов на первом касании', 'Ускорение реакции отдела продаж'],
   },
   {
     title: 'Support AI',
-    description: 'ИИ для поддержки клиентов',
-    features: ['24/7 чат-боты', 'Автоматическое решение запросов', 'Эскалация сложных случаев', 'Анализ удовлетворенности'],
-    examples: ['Решение 70% запросов автоматически', 'Сокращение времени ответа на 80%'],
+    description: 'AI-агенты для поддержки клиентов и внутренних сервисных команд.',
+    features: [
+      'Ответы 24/7 на типовые вопросы',
+      'Поиск по базе знаний и документации',
+      'Эскалация сложных запросов оператору',
+      'Единый контекст общения по всем каналам',
+    ],
+    examples: ['Снижение нагрузки на первую линию', 'Быстрый старт без расширения штата'],
   },
   {
     title: 'Operations AI',
-    description: 'Автоматизация операционных процессов',
-    features: ['Обработка документов', 'Генерация отчетов', 'Координация задач', 'Мониторинг KPI'],
-    examples: ['Освобождение 50% времени сотрудников', 'Снижение ошибок на 90%'],
+    description: 'Автоматизация повторяемых внутренних процессов и документооборота.',
+    features: [
+      'Обработка документов и заявок',
+      'Генерация отчётов и статусов',
+      'Внутренние ассистенты для сотрудников',
+      'Автоматизация согласований и сверок',
+    ],
+    examples: ['Сокращение ручной рутины', 'Прозрачность процессов и контроль SLA'],
   },
 ];
 
@@ -34,7 +49,7 @@ export default function ServicesPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Наши услуги
+          Услуги по внедрению AI-агентов
         </motion.h1>
 
         <div className="space-y-16">
@@ -52,10 +67,10 @@ export default function ServicesPage() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">Возможности</h3>
+                  <h3 className="text-xl font-semibold mb-4">Что входит</h3>
                   <ul className="space-y-2">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2">
                         <span className="text-accent">✓</span>
                         {feature}
                       </li>
@@ -63,11 +78,11 @@ export default function ServicesPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">Результаты</h3>
+                  <h3 className="text-xl font-semibold mb-4">Что получает бизнес</h3>
                   <ul className="space-y-2">
-                    {service.examples.map((example, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <span className="text-primary">📈</span>
+                    {service.examples.map((example) => (
+                      <li key={example} className="flex items-center gap-2">
+                        <span className="text-primary">📌</span>
                         {example}
                       </li>
                     ))}
@@ -76,8 +91,11 @@ export default function ServicesPage() {
               </div>
 
               <div className="mt-8 text-center">
-                <Link href="/contact" className="inline-block px-8 py-4 bg-primary text-black font-semibold rounded-lg hover:bg-primary/80 transition-colors">
-                  Заказать {service.title}
+                <Link
+                  href="/contact"
+                  className="inline-block px-8 py-4 bg-primary text-black font-semibold rounded-lg hover:bg-primary/80 transition-colors"
+                >
+                  Обсудить {service.title}
                 </Link>
               </div>
             </motion.div>

@@ -1,23 +1,29 @@
-# Use the official Node.js 18 Alpine image
-FROM node:18-alpine
+FROM node:20-alpine
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_CONTACT_EMAIL
+ARG NEXT_PUBLIC_CONTACT_PHONE
+ARG NEXT_PUBLIC_CONTACT_ADDRESS
+ARG TELEGRAM_BOT_TOKEN
+ARG TELEGRAM_ADMIN_CHAT_ID
+
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_CONTACT_EMAIL=$NEXT_PUBLIC_CONTACT_EMAIL
+ENV NEXT_PUBLIC_CONTACT_PHONE=$NEXT_PUBLIC_CONTACT_PHONE
+ENV NEXT_PUBLIC_CONTACT_ADDRESS=$NEXT_PUBLIC_CONTACT_ADDRESS
+ENV TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN
+ENV TELEGRAM_ADMIN_CHAT_ID=$TELEGRAM_ADMIN_CHAT_ID
+
 COPY package*.json ./
 
-# Install dependencies
 RUN npm ci
 
-# Copy the rest of the application code
 COPY . .
 
-# Build the application
 RUN npm run build
 
-# Expose the port the app runs on
 EXPOSE 3000
 
-# Start the application
 CMD ["npm", "start"]

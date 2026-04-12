@@ -3,10 +3,10 @@
 import { motion } from 'framer-motion';
 
 const steps = [
-  { title: 'Audit', description: 'Анализ ваших процессов и требований' },
-  { title: 'MVP', description: 'Создание минимально жизнеспособного продукта' },
-  { title: 'Integration', description: 'Интеграция с существующими системами' },
-  { title: 'Deployment', description: 'Запуск и обучение команды' },
+  { title: 'Аудит', description: 'Изучаем процессы, точки потерь, текущий стек и целевые KPI.' },
+  { title: 'MVP', description: 'Собираем рабочий сценарий на реальных данных и проверяем бизнес-эффект.' },
+  { title: 'Интеграция', description: 'Подключаем CRM, мессенджеры, базу знаний, API и внутренние системы.' },
+  { title: 'Запуск', description: 'Выводим решение в прод, обучаем команду и сопровождаем внедрение.' },
 ];
 
 export default function Process() {
@@ -20,13 +20,13 @@ export default function Process() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          Процесс работы
+          Как мы внедряем AI-агентов
         </motion.h2>
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {steps.map((step, index) => (
             <motion.div
               key={step.title}
-              className="flex flex-col items-center text-center mb-8 md:mb-0"
+              className="flex flex-col items-center text-center"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -38,7 +38,7 @@ export default function Process() {
               <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
               <p className="text-gray-300 max-w-xs">{step.description}</p>
               {index < steps.length - 1 && (
-                <div className="hidden md:block w-24 h-1 bg-primary mt-8"></div>
+                <div className="hidden md:block w-24 h-1 bg-primary mt-8" />
               )}
             </motion.div>
           ))}

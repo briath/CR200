@@ -1,26 +1,60 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "../components/Header";
+import type { Metadata } from 'next';
+import './globals.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ai-agents-company.com';
 
 export const metadata: Metadata = {
-  title: "AI Agents Company - Автоматизация бизнес-процессов",
-  description: "Создаем AI-агентов для автоматизации бизнес-процессов с интеграцией в CRM и API за 2–4 недели.",
-  keywords: "AI агенты, автоматизация, бизнес, CRM, API",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'AI-агенты для бизнеса | Автоматизация продаж, поддержки и операций',
+    template: '%s | AI Agents',
+  },
+  description:
+    'Разрабатываем и внедряем AI-агентов для бизнеса: продажи, поддержка клиентов, документооборот и внутренние процессы. Интеграция с CRM, API и мессенджерами за 2-6 недель.',
+  keywords: [
+    'AI-агенты для бизнеса',
+    'автоматизация бизнеса',
+    'AI для продаж',
+    'AI для поддержки',
+    'внедрение ИИ',
+    'CRM интеграции',
+  ],
+  applicationName: 'AI Agents',
+  category: 'business',
   openGraph: {
-    title: "AI Agents Company",
-    description: "Автоматизация бизнес-процессов с AI-агентами",
-    type: "website",
+    title: 'AI-агенты для бизнеса',
+    description:
+      'Внедряем AI-агентов для продаж, поддержки и операционных процессов с интеграцией в CRM, API и мессенджеры.',
+    type: 'website',
+    url: siteUrl,
+    locale: 'ru_RU',
+    siteName: 'AI Agents',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'AI Agents — внедрение AI-агентов для бизнеса',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI-агенты для бизнеса',
+    description:
+      'AI-агенты для продаж, поддержки и внутренних процессов с интеграцией в CRM, API и мессенджеры.',
+    images: ['/twitter-image'],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
+  manifest: '/manifest.webmanifest',
+  alternates: {
+    canonical: siteUrl,
   },
 };
 
@@ -30,13 +64,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ru"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="ru" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-[#0B0F19] text-white">
         <Header />
         <main className="flex-1 pt-20">{children}</main>
+        <Footer />
       </body>
     </html>
   );
